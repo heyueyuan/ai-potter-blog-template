@@ -8,8 +8,8 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "AI-Porter Blog Template",
-  description: "Minimal personal blog template for AI-Porter",
+  title: "Knowledge Canvas",
+  description: "Your personal AI knowledge stream",
 };
 
 export default function RootLayout({
@@ -18,10 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

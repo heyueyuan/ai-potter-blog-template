@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --background: #F2F4F8;
+  --foreground: #1D1D1F;
+  --text-muted: #86868B;
+  --primary: #067bf9;
+  --surface: rgba(255, 255, 255, 0.65);
+  --edge: rgba(255, 255, 255, 0.5);
 }
 
 @theme inline {
@@ -13,13 +17,65 @@
 
 body {
   background: var(--background);
+  background-image: radial-gradient(at 40% 20%, rgba(224, 234, 252, 0.5) 0px, transparent 50%),
+                    radial-gradient(at 80% 0%, rgba(207, 222, 243, 0.5) 0px, transparent 50%),
+                    radial-gradient(at 0% 50%, rgba(224, 234, 252, 0.5) 0px, transparent 50%);
+  background-attachment: fixed;
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), "Inter", Arial, Helvetica, sans-serif;
 }
 
-a {
-  color: #d4d4d8;
+a { color: inherit; }
+
+/* ── glass card ─────────────────────────────────── */
+
+.glass-card {
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--edge);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+.glass-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+}
+
+/* ── tag pill ───────────────────────────────────── */
+
+.tag-pill {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: rgba(6, 123, 249, 0.08);
+  color: var(--primary);
+}
+
+/* ── dot bullet ─────────────────────────────────── */
+
+.dot-bullet::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin-right: 0.6rem;
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+}
+
+.dot-bullet {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* ── markdown content ───────────────────────────── */
 
 .md-content h1,
 .md-content h2,
@@ -27,11 +83,12 @@ a {
   margin-top: 1.4rem;
   margin-bottom: 0.8rem;
   font-weight: 600;
+  color: var(--foreground);
 }
 
 .md-content p,
 .md-content li {
-  color: #d4d4d8;
+  color: #4a4a4f;
   line-height: 1.75;
 }
 
@@ -41,8 +98,8 @@ a {
 }
 
 .md-content pre {
-  background: #18181b;
-  border: 1px solid #27272a;
+  background: #f8f9fb;
+  border: 1px solid #e5e7eb;
   border-radius: 0.6rem;
   padding: 0.9rem;
   overflow-x: auto;
@@ -50,4 +107,26 @@ a {
 
 .md-content code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* ── expand toggle ──────────────────────────────── */
+
+.expand-toggle {
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.5rem 0;
+  transition: color 0.2s;
+}
+
+.expand-toggle:hover { color: var(--foreground); }
+
+.expand-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.expand-content.open {
+  max-height: 100000px;
 }
